@@ -1,7 +1,7 @@
 import compact from 'lodash.compact'
 import { EventEmitter } from 'events'
 
-enum SocketStatus {
+export enum SocketStatus {
   CONNECTING = 'CONNECTING',
   CONNECTED = 'CONNECTED',
   DISCONNECTED = 'DISCONNECTED',
