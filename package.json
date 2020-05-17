@@ -1,10 +1,13 @@
 {
   "name": "minisockets",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A wrapper around a web socket client that can handle disconnects and queues outgoing messages",
   "repository": {
     "type": "git",
     "url": "https://github.com/francoisrv/minisockets"
+  },
+  "scripts": {
+    "prepublishOnly": "rm -rf dist && tsc"
   },
   "devDependencies": {
     "typescript": "^3.9.2"

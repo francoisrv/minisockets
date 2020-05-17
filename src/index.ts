@@ -5,6 +5,7 @@ enum SocketStatus {
   CONNECTING = 'CONNECTING',
   CONNECTED = 'CONNECTED',
   DISCONNECTED = 'DISCONNECTED',
+  CLOSED = 'CLOSED'
 }
 
 interface Options {
@@ -12,9 +13,19 @@ interface Options {
 }
 
 export default interface MiniSockets<Message> {
+  emit(event: 'connected'): boolean
   on(event: 'connected', handler: () => void): this
-  on(event: 'discconnected', handler: () => void): this
-  on(event: 'error', handler: (error: Event) => void): this
+
+  emit(event: 'disconnected'): boolean
+  on(event: 'disconnected', handler: () => void): this
+
+  emit(event: 'closed'): boolean
+  on(event: 'closed', handler: () => void): this
+
+  emit(event: 'error', error: Error | Event): boolean
+  on(event: 'error', handler: (error: Error | Event) => void): this
+
+  emit(event: 'message', message: any): boolean
   on(event: 'message', handler: (message: Message) => void): this
 }
 
@@ -83,5 +94,13 @@ export default class MiniSockets<Message> extends EventEmitter {
     }
     this.messages.push({ event, payload })
     return false
+  }
+
+  close() {
+    if (this.connection) {
+      this.connection.close()
+      this.status = SocketStatus.CLOSED
+      this.emit('closed')
+    }
   }
 }
