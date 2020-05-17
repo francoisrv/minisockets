@@ -1,6 +1,6 @@
 {
   "name": "minisockets",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A wrapper around a web socket client that can handle disconnects and queues outgoing messages",
   "repository": {
     "type": "git",
@@ -12,6 +12,8 @@
   "devDependencies": {
     "typescript": "^3.9.2"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@types/lodash.compact": "^3.0.6",
     "@types/node": "^14.0.1",
